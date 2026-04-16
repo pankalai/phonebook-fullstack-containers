@@ -49,6 +49,7 @@ jobs:
         - uses: actions/setup-node@v4
           with:
             node-version: '20'
+            cache: 'npm'
 
         - name: Install frontend dependencies
           working-directory: frontend
@@ -60,6 +61,7 @@ jobs:
 
         - name: Setup flyctl
           uses: superfly/flyctl-actions/setup-flyctl@master
+
         - name: Deploy app
           run: flyctl deploy --remote-only --wait-timeout 300
           env:
@@ -71,6 +73,7 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v4
+
         - name: Bump version and push tag
           uses: anothrNick/github-tag-action@1.75.0
           env:
