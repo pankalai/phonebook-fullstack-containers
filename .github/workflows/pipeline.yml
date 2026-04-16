@@ -39,6 +39,10 @@ jobs:
         - name: Lint backend
           run: npm run lint
 
+        # Install Playwright browsers
+        - name: Install Playwright browsers
+          run: npx playwright install --with-deps
+
         # Tests
         - name: Run unit tests
           working-directory: frontend
