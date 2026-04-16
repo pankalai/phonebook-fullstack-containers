@@ -28,6 +28,10 @@ jobs:
           working-directory: frontend
           run: npm run lint
 
+        - name: Build frontend
+          working-directory: frontend
+          run: npm run build
+
         # Backend
         - name: Install dependencies backend
           run: npm ci
@@ -35,9 +39,17 @@ jobs:
         - name: Lint backend
           run: npm run lint
 
+        # Install Playwright browsers
+        - name: Install Playwright browsers
+          run: npx playwright install --with-deps
+
         # Tests
-        - name: Run tests
+        - name: Run unit tests
+          working-directory: frontend
           run: npm run test
+
+        - name: Run e2e tests
+          run: npm run test:e2e
 
     deploy:
       needs: [build_and_test]

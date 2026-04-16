@@ -45,6 +45,11 @@ export default [
     },
   },
   { 
-    ignores: ["frontend/**", "dist/**"],
+    ignores: [
+      "frontend/**", 
+      "dist/**",
+      "e2e-tests/**",
+      "playwright.config.js"
+    ],
   },
 ]
