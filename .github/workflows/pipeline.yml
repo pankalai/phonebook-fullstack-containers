@@ -17,6 +17,7 @@ jobs:
         - uses: actions/setup-node@v4
           with:
             node-version: '20'
+            cache: 'npm'
 
         # Frontend
         - name: Install dependencies frontend
@@ -26,10 +27,6 @@ jobs:
         - name: Lint frontend
           working-directory: frontend
           run: npm run lint
-
-        - name: Build frontend
-          working-directory: frontend
-          run: npm run build
 
         # Backend
         - name: Install dependencies backend
@@ -48,6 +45,19 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v4
+        
+        - uses: actions/setup-node@v4
+          with:
+            node-version: '20'
+
+        - name: Install frontend dependencies
+          working-directory: frontend
+          run: npm ci
+
+        - name: Build frontend
+          working-directory: frontend
+          run: npm run build
+
         - name: Setup flyctl
           uses: superfly/flyctl-actions/setup-flyctl@master
         - name: Deploy app
