@@ -21,6 +21,10 @@ const createError = (name) => {
 }
 
 // Routes
+app.get('/health', (req, res) => {
+  res.status(200).send('ok')
+})
+
 app.get('/info', (request, response) => {
   Person.countDocuments().then(number => {
     response.send(`<p>Phonebook has info for ${number} people</p><p>${new Date()}</p>`)
